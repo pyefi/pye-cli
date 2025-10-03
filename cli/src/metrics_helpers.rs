@@ -34,7 +34,7 @@ pub fn log_validator_mev_data(target_epoch: u64, mev_data: &ValidatorInfo) {
         ("vote_account", mev_data.vote_account, String),
         (
             "mev_commission_bps",
-            mev_data.mev_commission_bps as i64,
+            mev_data.mev_commission_bps.unwrap_or(10_000) as i64,
             i64
         ),
         ("mev_rewards", mev_data.mev_rewards as i64, i64),

@@ -10,7 +10,7 @@ use solana_sdk::pubkey::Pubkey;
 #[derive(Clone, Deserialize, Debug)]
 pub struct ValidatorInfo {
     pub vote_account: String,
-    pub mev_commission_bps: u64,
+    pub mev_commission_bps: Option<u64>,
     pub mev_rewards: u64,
     pub running_jito: bool,
     pub active_stake: u64,
@@ -158,7 +158,7 @@ pub fn calculate_excess_mev_reward(
         mev_data.mev_rewards,
         pye_account_active_stake,
         mev_data.active_stake,
-        mev_data.mev_commission_bps,
+        mev_data.mev_commission_bps.unwrap_or(10_000),
         reward_commissions.mev_tips_bps,
     );
     println!("Excess MEV Commission: {}\n", excess_mev_commission);
